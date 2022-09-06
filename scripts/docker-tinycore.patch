@@ -1,0 +1,29 @@
+--- a/data/root/usr/bin/tce-load	2022-08-30 08:31:42.991023502 +0200
++++ b/data/root/usr/bin/tce-load	2022-08-30 08:44:49.504582953 +0200
+@@ -9,6 +9,7 @@
+ KERNELVER=$(uname -r)
+ unset WGET INSTALL COPYINSTALL BOOTING ONDEMAND DOWNLOAD_ONLY LOAD_ONLY SUPPRESS
+ FORCE="n"  # Overwrite system files default to no. Use -f to force overwrite.
++COPYINSTALL=TRUE # Mount binds are not available inside docker, so default to copy
+ SAVED_DIR=`pwd`
+ 
+ ONBOOTNAME="$(getbootparam lst 2>/dev/null)"
+@@ -81,15 +82,15 @@
+ 
+ copyInstall() {
+ 	[ -d /mnt/test ] || sudo /bin/mkdir -p /mnt/test
+-	sudo /bin/mount $1 /mnt/test -t squashfs -o loop,ro
++	sudo unsquashfs -n -f -d /mnt/test $1 >/dev/null
+ 	if [ "$?" == 0 ]; then
+ 		if [ "$(ls -A /mnt/test)" ]; then
+ 			yes "$FORCE" | sudo /bin/cp -ai /mnt/test/. / 2>/dev/null
+ 			[ -n "`find /mnt/test/ -type d -name modules`" ] && MODULES=TRUE
+ 		fi
+-		sudo /bin/umount -d /mnt/test
++		sudo rm -rf /mnt/test/*
+ 	fi
+-	[ "$BOOTING" ] || rmdir /mnt/test
++	[ "$BOOTING" ] || sudo rmdir /mnt/test
+ }
+ 
+ update_system() {
