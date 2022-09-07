@@ -7,7 +7,13 @@
 
 ## Quick guide
 
-To run just `make` as show below:
+To run just `docker pull` as show below:
+
+~~~
+sudo docker run -it ghcr.io/innovarew/docker-tinycore:main /bin/sh
+~~~
+
+To build just `make` as show below:
 
 ~~~
 # prepare the rootfs, build, and run the container
