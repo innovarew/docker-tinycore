@@ -7,6 +7,13 @@
 
 ## Quick guide
 
+To build over it just pull the [docker-tinycore package](https://github.com/innovarew/docker-tinycore/pkgs/container/docker-tinycore/versions)
+
+~~~
+echo ghcr.io/innovarew/docker-tinycore:main > Dockerfile
+docker build -t docker-tinycore-scratch .
+~~~
+
 To run just `docker pull` as show below:
 
 ~~~
