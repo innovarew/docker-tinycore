@@ -52,8 +52,8 @@ tce_rootfs_init()
         # get unsquashfs into container to unpack tcz
         tce_install liblzma.tcz $PWD/root/
         tce_install squashfs-tools.tcz $PWD/root/
-        patch -p2 < ../scripts/docker-tinycore.patch
 
+        patch -p2 < rootfs-x86_64-13.patch
     )
 
     TC_TAR=`echo $TC_URL | awk -F/ '{print "rootfs-"$5"-"$4".tar.xz"}'`
