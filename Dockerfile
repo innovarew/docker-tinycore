@@ -1,6 +1,7 @@
 FROM scratch
+ARG TC_VER=x86_64-13.x
 
-ADD data/rootfs-x86_64-13.x.tar.xz /
+ADD data/rootfs-$TC_VER.tar.xz /
 
 COPY scripts/tc-docker /usr/bin/
 
