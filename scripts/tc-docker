@@ -22,7 +22,6 @@ PROGVERSION=v1.2;
 [ -z "$TC_URL" ] && TC_URL=http://tinycorelinux.net/13.x/x86_64/
 ISO_URL=$TC_URL/release/TinyCorePure64-current.iso
 TCZ_URL=$TC_URL/tcz
-ISO_FILE=$(basename $ISO_URL)
 
 TCE_DIR=$PWD/data/tce/optional
 if grep -qi tinycore /etc/os-release
@@ -36,6 +35,11 @@ fi
 
 tce_rootfs_init()
 {
+    TC_VER=$(echo $TC_URL | awk -F/ '{print $5"-"$4}')
+    TC_TAR="rootfs-$TC_VER.tar.xz"
+    TC_PATCH="rootfs-$TC_VER.patch"
+
+    echo "# $ISO_URL"
     (
         rm -r data/root
         rm -r data/tinycore
@@ -53,15 +57,16 @@ tce_rootfs_init()
         tce_install liblzma.tcz $PWD/root/
         tce_install squashfs-tools.tcz $PWD/root/
 
-        patch -p2 < rootfs-x86_64-13.x.patch
+        patch -p2 < $TC_PATCH
     )
 
-    TC_TAR=`echo $TC_URL | awk -F/ '{print "rootfs-"$5"-"$4".tar.xz"}'`
     (cd data/root; tar cJf ../$TC_TAR .)
 }
 
 tce_rootfs_unpack()
 {
+    ISO_FILE=$(basename $ISO_URL)
+
     wget -qc "$ISO_URL"
     # wget -qc "$ISO_URL.md5.txt" && md5sum -c `basename "$ISO_URL.md5.txt"`
 
