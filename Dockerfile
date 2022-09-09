@@ -1,5 +1,5 @@
 FROM scratch
-ARG TC_VER=x86_64-13.x
+ARG TC_VER=13.x-x86_64
 
 ADD data/rootfs-$TC_VER.tar.xz /
 

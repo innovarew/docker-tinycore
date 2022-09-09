@@ -14,17 +14,17 @@ echo FROM ghcr.io/innovarew/docker-tinycore > Dockerfile
 docker build -t docker-tinycore-scratch .
 ~~~
 
-To run just `docker run` as show below:
+To run, just `docker run` as show below:
 
 ~~~
 sudo docker run -it ghcr.io/innovarew/docker-tinycore /bin/sh
 ~~~
 
-To build just `make` as show below:
+To build locally, just `make` as show below:
 
 ~~~
 # prepare the rootfs, build, and run the container
-sudo make
+sudo make TC_URL=http://tinycorelinux.net/13.x/x86_64/
 ~~~
 
 ## Detailed steps

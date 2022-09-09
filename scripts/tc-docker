@@ -35,12 +35,13 @@ fi
 
 tce_rootfs_init()
 {
-    TC_VER=$(echo $TC_URL | awk -F/ '{print $5"-"$4}')
+    TC_VER=$(echo $TC_URL | awk -F/ '{print $4"-"$5}')
     TC_TAR="rootfs-$TC_VER.tar.xz"
     TC_PATCH="rootfs-$TC_VER.patch"
 
     echo "# $ISO_URL"
     (
+        #rm -r data/tce
         rm -r data/root
         rm -r data/tinycore
 
