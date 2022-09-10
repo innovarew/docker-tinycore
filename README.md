@@ -1,5 +1,6 @@
 ![Docker build](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-image.yml/badge.svg?event=push)
 ![Docker publish](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-publish.yml/badge.svg?event=push)
+![GitHub file size in bytes](https://img.shields.io/github/size/innovarew/docker-tinycore/data/rootfs-13.x-x86_64.tar.xz?label=image%20size:latest)
 
 # docker-tinycore
 
