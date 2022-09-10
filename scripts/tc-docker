@@ -28,10 +28,7 @@ if grep -qi tinycore /etc/os-release
 then
     TCE_DIR=/tmp/tce/optional
 fi
-if [ ! -d $TCE_DIR ]
-then
-    mkdir -p $TCE_DIR
-fi
+[ ! -d $TCE_DIR ] && mkdir -p $TCE_DIR
 
 tce_rootfs_init()
 {
@@ -41,7 +38,9 @@ tce_rootfs_init()
 
     echo "# $ISO_URL"
     (
-        #rm -r data/tce
+        rm -r data/tce
+        mkdir -p $TCE_DIR
+
         rm -r data/root
         rm -r data/tinycore
 
