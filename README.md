@@ -2,7 +2,6 @@
 ![Docker publish](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-publish.yml/badge.svg?event=push)
 ![GitHub file size in bytes](https://img.shields.io/github/size/innovarew/docker-tinycore/data/rootfs-13.x-x86_64.tar.xz?label=image%20size:latest)
 
-[tree/13.x-x86_64](/tree/13.x-x86_64)
 # docker-tinycore
 
 [Docker](https://www.docker.com) from scratch image of [Tinycore Linux](http://www.tinycorelinux.net)
