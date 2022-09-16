@@ -8,3 +8,4 @@ COPY scripts/tc-docker /usr/bin/
 RUN NORTC=1 NOZSWAP=1 /etc/init.d/tc-config
 
 USER tc
+CMD ["/bin/sh"]

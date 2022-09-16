@@ -19,7 +19,7 @@ docker build -t docker-tinycore-scratch .
 To run, just `docker run` as show below:
 
 ~~~
-sudo docker run -it ghcr.io/innovarew/docker-tinycore /bin/sh
+sudo docker run -it ghcr.io/innovarew/docker-tinycore
 ~~~
 
 To build locally, just `make` as show below:
