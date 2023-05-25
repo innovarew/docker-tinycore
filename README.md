@@ -1,6 +1,6 @@
 ![Docker build](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-image.yml/badge.svg?event=push)
 ![Docker publish](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-publish.yml/badge.svg?event=push)
-![GitHub file size in bytes](https://img.shields.io/github/size/innovarew/docker-tinycore/data/rootfs-13.x-x86_64.tar.xz?label=image%20size:latest)
+![GitHub file size in bytes](https://img.shields.io/github/size/innovarew/docker-tinycore/data/rootfs-14.x-x86_64.tar.xz?label=image%20size:latest)
 ![GitHub license](https://img.shields.io/github/license/innovarew/docker-tinycore)
 
 # docker-tinycore
@@ -36,6 +36,7 @@ Ready to use docker images from [docker-tinycore](https://github.com/innovarew/d
 | Release/Arch   | Docker Image                                         |
 | -------------- | ---------------------------------------------------- |
 | [latest](https://github.com/innovarew/docker-tinycore/)     | `FROM ghcr.io/innovarew/docker-tinycore:latest`      |
+| [14.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/14.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:14.x-x86_64` |
 | [13.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/13.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:13.x-x86_64` |
 | [12.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/12.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:12.x-x86_64` |
 | [11.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/11.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:11.x-x86_64` |
