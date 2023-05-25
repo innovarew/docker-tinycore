@@ -7,7 +7,7 @@ name: Docker
 
 on:
   schedule:
-    - cron: '17 2 1 * *'
+    - cron: '17 2 * * *'
   push:
     branches:
       - main
@@ -16,7 +16,7 @@ on:
       - 12.x-x86_64
       - 11.x-x86_64
       - 10.x-x86_64
-      
+
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
@@ -25,7 +25,7 @@ on:
       - latest
       - 13.x-x86_64
       - 12.x-x86_64
-      - 11.x-x86_64      
+      - 11.x-x86_64
       - 10.x-x86_64
 
 env:
