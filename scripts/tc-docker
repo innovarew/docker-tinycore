@@ -19,7 +19,7 @@ PROGNAME=`basename "$0"`;
 PROGAUTHOR="innovarew <box> (c) 2022."
 PROGVERSION=v1.2;
 
-[ -z "$TC_URL" ] && TC_URL=http://tinycorelinux.net/13.x/x86_64/
+[ -z "$TC_URL" ] && TC_URL=http://tinycorelinux.net/14.x/x86_64/
 ISO_URL=$TC_URL/release/TinyCorePure64-current.iso
 TCZ_URL=$TC_URL/tcz
 
