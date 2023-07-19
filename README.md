@@ -1,7 +1,6 @@
 
 ![GitHub license](https://img.shields.io/github/license/innovarew/docker-tinycore)
 ![GitHub Release Date](https://img.shields.io/github/release-date/innovarew/docker-tinycore)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/innovarew/docker-tinycore)
 ![GitHub top language](https://img.shields.io/github/languages/top/innovarew/docker-tinycore)
 ![Docker build](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-image.yml/badge.svg?event=push)
 ![Docker publish](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-publish.yml/badge.svg?event=push)
