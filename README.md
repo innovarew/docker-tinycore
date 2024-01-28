@@ -1,29 +1,9 @@
+# docker-tcl-core-x86
 
-![GitHub license](https://img.shields.io/github/license/innovarew/docker-tinycore)
-![GitHub Release Date](https://img.shields.io/github/release-date/innovarew/docker-tinycore)
-![GitHub top language](https://img.shields.io/github/languages/top/innovarew/docker-tinycore)
-![Docker build](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-image.yml/badge.svg?event=push)
-![Docker publish](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-publish.yml/badge.svg?event=push)
-![GitHub file size in bytes](https://img.shields.io/github/size/innovarew/docker-tinycore/data/rootfs-14.x-x86_64.tar.xz?label=image%20size:latest)
-
-# docker-tinycore
-
-[Docker](https://www.docker.com) from scratch image of [Tinycore Linux](http://www.tinycorelinux.net)
+WORK IN PROGRESS! Forked from [innovarew/docker-tinycore](https://github.com/innovarew/docker-tinycore/tree/main)
+[Docker](https://www.docker.com) from scratch image of [Tinycore Linux](http://www.tinycorelinux.net) Core x86 version.
 
 ## Quick guide
-
-To build on top of it, just pull from the [docker-tinycore package](https://github.com/innovarew/docker-tinycore/pkgs/container/docker-tinycore/versions)
-
-~~~
-echo FROM ghcr.io/innovarew/docker-tinycore > Dockerfile
-docker build -t docker-tinycore-scratch .
-~~~
-
-To run, just `docker run` as show below:
-
-~~~
-sudo docker run -it ghcr.io/innovarew/docker-tinycore
-~~~
 
 To build locally, just `make` as show below:
 
@@ -32,27 +12,15 @@ To build locally, just `make` as show below:
 sudo make TC_URL=http://tinycorelinux.net/13.x/x86_64/
 ~~~
 
-## Supported versions
-
-Ready to use docker images from [docker-tinycore](https://github.com/innovarew/docker-tinycore/pkgs/container/docker-tinycore/versions):
-
-| Release/Arch   | Docker Image                                         |
-| -------------- | ---------------------------------------------------- |
-| [latest](https://github.com/innovarew/docker-tinycore/)     | `FROM ghcr.io/innovarew/docker-tinycore:latest`      |
-| [14.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/14.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:14.x-x86_64` |
-| [13.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/13.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:13.x-x86_64` |
-| [12.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/12.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:12.x-x86_64` |
-| [11.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/11.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:11.x-x86_64` |
-| [10.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/10.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:10.x-x86_64` |
-
 ## Detailed steps
 
 What goes on under the hood is shown below:
+Note: I want to generate the rootfs-x86-14.x.tar.xz. I don't have it yet.
 
 ~~~
 cat > Dockerfile <<EOF
 FROM scratch
-ADD data/rootfs-x86_64-13.x.tar.xz /
+ADD data/rootfs-x86-14.x.tar.xz /
 EOF
 
 # unpack tinycore rootfs, sudo needed to unpack cpio proper perms
