@@ -29,7 +29,7 @@ To build locally, just `make` as show below:
 
 ~~~
 # prepare the rootfs, build, and run the container
-sudo make TC_URL=http://tinycorelinux.net/13.x/x86_64/
+sudo make TC_URL=http://tinycorelinux.net/14.x/x86_64/
 ~~~
 
 ## Supported versions
