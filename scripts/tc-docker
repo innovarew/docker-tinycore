@@ -1,10 +1,10 @@
 #!/bin/sh
 #
 # @file tc-docker
-# @version v1.0
-# @description tinycore (tc) in docker
-# @author innovarew <box> (c) Copyright 2022.
+# @description tc-docker, helper script for building innovarew/docker-tinycore
+# @author innovarew <innovarew at github.com> (c) Copyright 2022
 # @copyright All rights reserved. Read LICENSE.txt file for the license terms.
+# @url github.com/innovarew/docker-tinycore
 #
 # Changelog:
 #
