@@ -14,13 +14,19 @@
 # 26/08/2022        innovarew
 # v1.0 Initial version
 #
+# 26/08/2023        innovarew
+# v1.1 Bump version
+#
 
-PROGNAME=`basename "$0"`;
+PROGNAME=${0##*/}
 PROGAUTHOR="innovarew <box> (c) 2022."
-PROGVERSION=v1.2;
+PROGVERSION=v1.2
 
-[ -z "$TC_URL" ] && TC_URL=http://tinycorelinux.net/14.x/x86_64/
-ISO_URL=$TC_URL/release/TinyCorePure64-current.iso
+set -euf
+
+TC_ARCH=${TC_ARCH:-x86_64}
+TC_URL=${TC_URL:-http://tinycorelinux.net/14.x/${TC_ARCH}}
+ISO_URL=${ISO_URL:-$TC_URL/release/TinyCorePure64-current.iso}
 TCZ_URL=$TC_URL/tcz
 
 TCE_DIR=$PWD/data/tce/optional
@@ -41,8 +47,8 @@ tce_rootfs_init()
         rm -r data/tce
         mkdir -p $TCE_DIR
 
-        rm -r data/root
-        rm -r data/tinycore
+        rm -rf data/root
+        rm -rf data/tinycore
 
         mkdir -p data
         cd data
@@ -60,20 +66,20 @@ tce_rootfs_init()
         patch -p2 < $TC_PATCH
     )
 
-    (cd data/root; tar cJf ../$TC_TAR .)
+    (cd data/root; tar cJf "../$TC_TAR" .)
 }
 
 tce_rootfs_unpack()
 {
-    ISO_FILE=$(basename $ISO_URL)
+    ISO_FILE=$(basename "$ISO_URL")
 
     wget -qc "$ISO_URL"
-    # wget -qc "$ISO_URL.md5.txt" && md5sum -c `basename "$ISO_URL.md5.txt"`
+    # wget -qc "$ISO_URL.md5.txt" && md5sum -c $(basename "$ISO_URL.md5.txt")
 
     if [ ! -d "tinycore" ]
     then
         mkdir -p tinycore
-        7z x -otinycore $ISO_FILE >/dev/null
+        7z x -otinycore "$ISO_FILE" >/dev/null
         mkdir -p root
         (cd root; zcat ../tinycore/boot/corepure64.gz | cpio --extract)
     fi
@@ -85,6 +91,12 @@ tce_cddir()
     then
         cd $TCE_DIR
     fi
+}
+
+UNSQUASHFS=unsquashfs
+tce_download()
+{
+    UNSQUASHFS= tce_install "$@"
 }
 
 # usage: tce_install squashfs-tools.tcz /
@@ -113,13 +125,16 @@ tce_install()
 
         wget -qc $TCZ_URL/$app
         wget -qc $TCZ_URL/$app.md5.txt
-        ! md5sum -c $app.md5.txt && return
+        [ -e "$app.md5.txt" ] && md5sum -c $app.md5.txt
 
-        unsquashfs -n -d "$root" -f $app >/dev/null
+        if [ -n "$UNSQUASHFS" ]
+        then
+            unsquashfs -n -d "$root" -f $app >/dev/null
 
-        # update system
-        mkdir -p $root/usr/local/tce.installed/
-        touch $root/usr/local/tce.installed/${app%.tcz}
+            # update system
+            mkdir -p $root/usr/local/tce.installed/
+            touch $root/usr/local/tce.installed/${app%.tcz}
+        fi
 
         # update libs
         if [ -w /etc/ld.so.cache ]
@@ -167,7 +182,7 @@ tce_search()
     (
         tce_cddir
         wget -qc $TCZ_URL
-        cat `basename $TCZ_URL`
+        cat $(basename "$TCZ_URL")
     )
 }
 
