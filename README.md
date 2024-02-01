@@ -60,8 +60,8 @@ EOF
 sudo scripts/tc-docker tce_rootfs_init data/
 
 # build and run the tinycore docker container
-sudo docker build -t tinycore:latest .
-sudo docker run -it tinycore:latest /bin/sh
+sudo docker build -t docker-tinycore-local:latest .
+sudo docker run -it docker-tinycore-local:latest /bin/sh
 ~~~
 
 ## Overview
