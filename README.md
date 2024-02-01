@@ -22,7 +22,7 @@ docker build -t docker-tinycore-scratch .
 To run, just `docker run` as show below:
 
 ~~~
-sudo docker run -it ghcr.io/innovarew/docker-tinycore
+sudo docker run -it ghcr.io/innovarew/docker-tinycore:latest
 ~~~
 
 To build locally, just `make` as show below:
@@ -36,10 +36,11 @@ sudo make TC_URL=http://tinycorelinux.net/13.x/x86_64/
 
 Ready to use docker images from [docker-tinycore](https://github.com/innovarew/docker-tinycore/pkgs/container/docker-tinycore/versions):
 
-| Release/Arch   | Docker Image                                         |
-| -------------- | ---------------------------------------------------- |
-| [latest](https://github.com/innovarew/docker-tinycore/)     | `FROM ghcr.io/innovarew/docker-tinycore:latest`      |
+| Release/Arch   | Docker Image                                                                                                      |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [latest](https://github.com/innovarew/docker-tinycore/)                     | `FROM ghcr.io/innovarew/docker-tinycore:latest`      |
 | [14.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/14.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:14.x-x86_64` |
+| [14.x-x86](https://github.com/innovarew/docker-tinycore/tree/14.x-x86)      | `FROM ghcr.io/innovarew/docker-tinycore:14.x-x86`    |
 | [13.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/13.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:13.x-x86_64` |
 | [12.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/12.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:12.x-x86_64` |
 | [11.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/11.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:11.x-x86_64` |
