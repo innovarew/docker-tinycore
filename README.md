@@ -34,7 +34,7 @@ sudo make TC_URL=http://tinycorelinux.net/14.x/x86_64/
 
 ## Supported versions
 
-Ready to use docker images from [docker-tinycore](https://github.com/innovarew/docker-tinycore/pkgs/container/docker-tinycore/versions):
+Ready to use docker images from [docker-tinycore](https://github.com/innovarew/docker-tinycore/pkgs/container/docker-tinycore/versions) (see link on how-to use):
 
 | Release/Arch   | Docker Image                                                                                                      |
 | -------------- | ----------------------------------------------------------------------------------------------------------------- |
