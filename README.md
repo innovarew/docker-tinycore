@@ -53,7 +53,7 @@ What goes on under the hood is shown below:
 ~~~
 cat > Dockerfile <<EOF
 FROM scratch
-ADD data/rootfs-x86_64-13.x.tar.xz /
+ADD data/rootfs-x86_64-14.x.tar.xz /
 EOF
 
 # unpack tinycore rootfs, sudo needed to unpack cpio proper perms
