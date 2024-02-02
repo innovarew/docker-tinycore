@@ -1,10 +1,10 @@
 #!/bin/sh
 #
 # @file tc-docker
-# @version v1.0
-# @description tinycore (tc) in docker
-# @author innovarew <box> (c) Copyright 2022.
+# @description tc-docker, helper script for building innovarew/docker-tinycore
+# @author innovarew <innovarew at github.com> (c) Copyright 2022 GPLv2
 # @copyright All rights reserved. Read LICENSE.txt file for the license terms.
+# @url github.com/innovarew/docker-tinycore
 #
 # Changelog:
 #
@@ -15,19 +15,29 @@
 # v1.0 Initial version
 #
 # 26/08/2023        innovarew
-# v1.1 Bump version
+# v1.1 Bump version x86_64
+#
+# 02/02/2024        innovarew
+# v1.2 Bump version x86
 #
 
 PROGNAME=${0##*/}
-PROGAUTHOR="innovarew <box> (c) 2022."
 PROGVERSION=v1.2
+PROGAUTHOR="innovarew"
+PROGURL="https://github.com/innovarew/docker-tinycore"
 
 set -euf
 
 TC_ARCH=${TC_ARCH:-x86_64}
 TC_URL=${TC_URL:-http://tinycorelinux.net/14.x/${TC_ARCH}}
-ISO_URL=${ISO_URL:-$TC_URL/release/TinyCorePure64-current.iso}
+TC_ISO=${TC_ISO:-$TC_URL/release/TinyCorePure64-current.iso}
 TCZ_URL=$TC_URL/tcz
+TC_CPIO=${TC_CPIO:-corepure64.gz}
+
+if [ "$TC_ARCH" = "x86" ]; then
+    TC_CPIO=core.gz
+    TC_ISO=$TC_URL/release/TinyCore-current.iso
+fi
 
 TCE_DIR=$PWD/data/tce/optional
 if grep -qi tinycore /etc/os-release
@@ -38,14 +48,14 @@ fi
 
 tce_rootfs_init()
 {
-    TC_VER=$(echo $TC_URL | awk -F/ '{print $4"-"$5}')
+    TC_VER=$(echo "$TC_URL" | awk -F/ '{print $4"-"$5}')
     TC_TAR="rootfs-$TC_VER.tar.xz"
     TC_PATCH="rootfs-$TC_VER.patch"
 
-    echo "# $ISO_URL"
+    echo "# $TC_ISO"
     (
         rm -r data/tce
-        mkdir -p $TCE_DIR
+        mkdir -p "$TCE_DIR"
 
         rm -rf data/root
         rm -rf data/tinycore
@@ -57,13 +67,13 @@ tce_rootfs_init()
         tce_rootfs_unpack "$@"
 
         # rootfs contains .ko.gz not used by docker
-        find $PWD/root/ -name '*.ko.gz' -exec rm {} \;
+        find "$PWD/root/" -name '*.ko.gz' -exec rm {} \;
 
         # get unsquashfs into container to unpack tcz
-        tce_install liblzma.tcz $PWD/root/
-        tce_install squashfs-tools.tcz $PWD/root/
+        tce_install liblzma.tcz "$PWD/root/"
+        tce_install squashfs-tools.tcz "$PWD/root/"
 
-        patch -p2 < $TC_PATCH
+        patch -p2 < "$TC_PATCH"
     )
 
     (cd data/root; tar cJf "../$TC_TAR" .)
@@ -71,17 +81,17 @@ tce_rootfs_init()
 
 tce_rootfs_unpack()
 {
-    ISO_FILE=$(basename "$ISO_URL")
+    ISO_FILE="${TC_ISO##*/}"
 
-    wget -qc "$ISO_URL"
-    # wget -qc "$ISO_URL.md5.txt" && md5sum -c $(basename "$ISO_URL.md5.txt")
+    wget -qc "$TC_ISO"
+    # wget -qc "$TC_ISO.md5.txt" && md5sum -c $(basename "$TC_ISO.md5.txt")
 
     if [ ! -d "tinycore" ]
     then
         mkdir -p tinycore
         7z x -otinycore "$ISO_FILE" >/dev/null
         mkdir -p root
-        (cd root; zcat ../tinycore/boot/corepure64.gz | cpio --extract)
+        (cd root; zcat "../tinycore/boot/$TC_CPIO" | cpio --extract)
     fi
 }
 
@@ -107,7 +117,7 @@ tce_install()
     local app=$1
     local root=$2
 
-    if [ -e $root/usr/local/tce.installed/${app%.tcz} ]
+    if [ -e "$root/usr/local/tce.installed/${app%.tcz}" ]
     then
         usage "warn: $app already installed in $root"
     fi
@@ -115,25 +125,25 @@ tce_install()
     (
         tce_cddir
 
-        if wget -qc $TCZ_URL/$app.dep
+        if wget -qc "$TCZ_URL/$app.dep"
         then
-            for dep in `cat $app.dep`
+            for dep in $(cat "$app.dep")
             do
                 tce_install $dep $root
             done
         fi
 
-        wget -qc $TCZ_URL/$app
-        wget -qc $TCZ_URL/$app.md5.txt
-        [ -e "$app.md5.txt" ] && md5sum -c $app.md5.txt
+        wget -qc "$TCZ_URL/$app"
+        wget -qc "$TCZ_URL/$app.md5.txt"
+        [ -e "$app.md5.txt" ] && md5sum -c "$app.md5.txt"
 
         if [ -n "$UNSQUASHFS" ]
         then
-            unsquashfs -n -d "$root" -f $app >/dev/null
+            unsquashfs -n -d "$root" -f "$app" >/dev/null
 
             # update system
-            mkdir -p $root/usr/local/tce.installed/
-            touch $root/usr/local/tce.installed/${app%.tcz}
+            mkdir -p "$root/usr/local/tce.installed/"
+            touch "$root/usr/local/tce.installed/${app%.tcz}"
         fi
 
         # update libs
@@ -150,8 +160,8 @@ tce_info()
     local app=$1
     (
         tce_cddir
-        [ ! -e $app.info ] && wget -qc $TCZ_URL/$app.info
-        cat $app.info
+        [ ! -e "$app.info" ] && wget -qc "$TCZ_URL/$app.info"
+        cat "$app.info"
     )
 }
 
@@ -161,8 +171,8 @@ tce_list()
     local app=$1
     (
         tce_cddir
-        [ ! -e $app.list ] && wget -qc $TCZ_URL/$app.list
-        cat $app.list
+        [ ! -e "$app.list" ] && wget -qc "$TCZ_URL/$app.list"
+        cat "$app.list"
     )
 }
 
@@ -172,8 +182,8 @@ tce_dep()
     local app=$1
     (
         tce_cddir
-        [ ! -e $app.list ] && wget -qc $TCZ_URL/$app.dep
-        cat $app.dep
+        [ ! -e "$app.list" ] && wget -qc "$TCZ_URL/$app.dep"
+        cat "$app.dep"
     )
 }
 
@@ -181,8 +191,8 @@ tce_search()
 {
     (
         tce_cddir
-        wget -qc $TCZ_URL
-        cat $(basename "$TCZ_URL")
+        wget -qc "$TCZ_URL"
+        cat "${TCZ_URL##*/}"
     )
 }
 
@@ -190,7 +200,7 @@ usage()
 {
     if [ $# -eq 0 ]
     then
-        echo "usage: $PROGNAME [tce_rootfs_init|tce_install] # @version $PROGVERSION @copyright $PROGAUTHOR";
+        echo "usage: $PROGNAME [tce_rootfs_init|tce_install] # @version $PROGVERSION (c) $PROGAUTHOR $PROGURL";
         exit;
     else
         echo "$@"

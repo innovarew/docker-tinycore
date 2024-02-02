@@ -1,4 +1,12 @@
+#
+# @description Dockerfile, for building innovarew/docker-tinycore
+# @author innovarew <innovarew at github.com> (c) Copyright 2022
+# @url github.com/innovarew/docker-tinycore
+#
+
 FROM scratch
+MAINTAINER "innovarew <innovarew at github.com> (c) Copyright 2022"
+LABEL author="@author innovarew <innovarew at github.com> (c) Copyright 2022."
 ARG TC_VER=14.x-x86
 
 ADD data/rootfs-$TC_VER.tar.xz /
