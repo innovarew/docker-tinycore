@@ -15,7 +15,10 @@
 # v1.0 Initial version
 #
 # 26/08/2023        innovarew
-# v1.1 Bump version
+# v1.1 Bump version x86_64
+#
+# 02/02/2024        innovarew
+# v1.2 Bump version x86
 #
 
 PROGNAME=${0##*/}
@@ -27,8 +30,14 @@ set -euf
 
 TC_ARCH=${TC_ARCH:-x86_64}
 TC_URL=${TC_URL:-http://tinycorelinux.net/14.x/${TC_ARCH}}
-ISO_URL=${ISO_URL:-$TC_URL/release/TinyCorePure64-current.iso}
+TC_ISO=${TC_ISO:-$TC_URL/release/TinyCorePure64-current.iso}
 TCZ_URL=$TC_URL/tcz
+TC_CPIO=${TC_CPIO:-corepure64.gz}
+
+if [ "$TC_ARCH" = "x86" ]; then
+    TC_CPIO=core.gz
+    TC_ISO=$TC_URL/release/TinyCore-current.iso
+fi
 
 TCE_DIR=$PWD/data/tce/optional
 if grep -qi tinycore /etc/os-release
@@ -43,10 +52,10 @@ tce_rootfs_init()
     TC_TAR="rootfs-$TC_VER.tar.xz"
     TC_PATCH="rootfs-$TC_VER.patch"
 
-    echo "# $ISO_URL"
+    echo "# $TC_ISO"
     (
         rm -r data/tce
-        mkdir -p $TCE_DIR
+        mkdir -p "$TCE_DIR"
 
         rm -rf data/root
         rm -rf data/tinycore
@@ -64,7 +73,7 @@ tce_rootfs_init()
         tce_install liblzma.tcz "$PWD/root/"
         tce_install squashfs-tools.tcz "$PWD/root/"
 
-        patch -p2 < $TC_PATCH
+        patch -p2 < "$TC_PATCH"
     )
 
     (cd data/root; tar cJf "../$TC_TAR" .)
@@ -72,17 +81,17 @@ tce_rootfs_init()
 
 tce_rootfs_unpack()
 {
-    ISO_FILE="${ISO_URL##*/}"
+    ISO_FILE="${TC_ISO##*/}"
 
-    wget -qc "$ISO_URL"
-    # wget -qc "$ISO_URL.md5.txt" && md5sum -c $(basename "$ISO_URL.md5.txt")
+    wget -qc "$TC_ISO"
+    # wget -qc "$TC_ISO.md5.txt" && md5sum -c $(basename "$TC_ISO.md5.txt")
 
     if [ ! -d "tinycore" ]
     then
         mkdir -p tinycore
         7z x -otinycore "$ISO_FILE" >/dev/null
         mkdir -p root
-        (cd root; zcat ../tinycore/boot/corepure64.gz | cpio --extract)
+        (cd root; zcat "../tinycore/boot/$TC_CPIO" | cpio --extract)
     fi
 }
 
