@@ -12,7 +12,7 @@
 
 ## Quick guide
 
-To build on top of it, just pull from the [docker-tinycore package](https://github.com/innovarew/docker-tinycore/pkgs/container/docker-tinycore/versions)
+To build on top of it, just pull from the [docker-tinycore package](https://github.com/innovarew/docker-tinycore/pkgs/container/docker-tinycore/)
 
 ~~~
 echo FROM ghcr.io/innovarew/docker-tinycore > Dockerfile
