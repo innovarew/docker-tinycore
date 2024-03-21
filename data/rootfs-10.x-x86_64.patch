@@ -1,3 +1,10 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: innovarew <innovarew @ users.noreply.github.com>
+Subject: [PATCH] innovarew/docker-tinycore: data/rootfs-10.x-x86_64.patch
+
+---
+diff --git a/data/root/usr/bin/tce-load b/data/root/usr/bin/tce-load
+---
 --- a/data/root/usr/bin/tce-load	2022-09-15 14:21:36.023392786 +0200
 +++ b/data/root/usr/bin/tce-load 	2022-09-15 14:26:05.504617088 +0200
 @@ -9,6 +9,7 @@

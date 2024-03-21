@@ -7,7 +7,7 @@
 FROM scratch
 MAINTAINER "innovarew <innovarew at github.com> (c) Copyright 2022"
 LABEL author="@author innovarew <innovarew at github.com> (c) Copyright 2022."
-ARG TC_VER=14.x-x86_64
+ARG TC_VER=15.x-x86_64
 
 ADD data/rootfs-$TC_VER.tar.xz /
 
