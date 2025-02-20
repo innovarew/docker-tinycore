@@ -2,6 +2,7 @@
 # @description Makefile, for building innovarew/docker-tinycore
 # @author innovarew <innovarew at github.com> (c) Copyright 2022
 # @url github.com/innovarew/docker-tinycore
+# SPDX-License-Identifier: GPL-2.0-or-later
 #
 
 # Set tinycore release
