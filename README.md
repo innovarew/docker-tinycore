@@ -39,6 +39,7 @@ Ready to use docker images from [docker-tinycore](https://github.com/innovarew/d
 | Release/Arch   | Docker Image                                                                                                      |
 | -------------- | ----------------------------------------------------------------------------------------------------------------- |
 | [latest](https://github.com/innovarew/docker-tinycore/)                     | `FROM ghcr.io/innovarew/docker-tinycore:latest`      |
+| [16.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/16.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:16.x-x86_64` |
 | [15.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/15.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:15.x-x86_64` |
 | [14.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/14.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:14.x-x86_64` |
 | [14.x-x86](https://github.com/innovarew/docker-tinycore/tree/14.x-x86)      | `FROM ghcr.io/innovarew/docker-tinycore:14.x-x86`    |

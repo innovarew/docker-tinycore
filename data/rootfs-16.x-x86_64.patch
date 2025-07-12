@@ -1,0 +1,33 @@
+From <hash> Mon Sep 17 00:00:00 2001
+From: innovarew <innovarew@users.noreply.github.com>
+Subject: [PATCH] innovarew/docker-tinycore: correção no tce-load
+
+---
+diff --git a/data/root/usr/bin/tce-load b/data/root/usr/bin/tce-load
+--- a/data/root/usr/bin/tce-load	2025-07-12 18:02:19.164907953 -0300
++++ b/data/root/usr/bin/tce-load	2025-07-12 18:05:12.574922247 -0300
+@@ -9,6 +9,7 @@
+ KERNELVER=$(uname -r)
+ unset WGET INSTALL COPYINSTALL BOOTING ONDEMAND DOWNLOAD_ONLY LOAD_ONLY SUPPRESS
+ FORCE="n"  # Overwrite system files default to no. Use -f to force overwrite.
++COPYINSTALL=TRUE # Mount binds are not available inside docker, so default to copy
+ SAVED_DIR=`pwd`
+ 
+ ONBOOTNAME="$(getbootparam lst 2>/dev/null)"
+@@ -81,13 +82,13 @@
+ 
+ copyInstall() {
+ 	[ -d /mnt/test ] || sudo /bin/mkdir -p /mnt/test
+-	sudo /bin/mount $1 /mnt/test -t squashfs -o loop,ro
++	sudo unsquashfs -n -f -d /mnt/test $1 >/dev/null
+ 	if [ "$?" == 0 ]; then
+ 		if [ "$(ls -A /mnt/test)" ]; then
+ 			yes "$FORCE" | sudo /bin/cp -ai /mnt/test/. / 2>/dev/null
+ 			[ -n "`find /mnt/test/ -type d -name modules`" ] && MODULES=TRUE
+ 		fi
+-		sudo /bin/umount -d /mnt/test
++		sudo rm -rf /mnt/test/*
+ 	fi
+-	[ "$BOOTING" ] || sudo rmdir /mnt/test
++	[ "$BOOTING" ] || sudo rmdir /mnt/test
+ }
