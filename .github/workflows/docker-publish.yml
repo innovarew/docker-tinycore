@@ -12,6 +12,7 @@ on:
     branches:
       - main
       - latest
+      - 16.x-x86_64
       - 15.x-x86_64
       - 14.x-x86_64
       - 14.x-x86
@@ -25,6 +26,7 @@ on:
     branches:
       - main
       - latest
+      - 16.x-x86_64
       - 15.x-x86_64
       - 14.x-x86_64
       - 14.x-x86
