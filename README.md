@@ -4,7 +4,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/innovarew/docker-tinycore)
 ![Docker build](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-image.yml/badge.svg?event=push)
 ![Docker publish](https://github.com/innovarew/docker-tinycore/actions/workflows/docker-publish.yml/badge.svg?event=push)
-![GitHub file size in bytes](https://img.shields.io/github/size/innovarew/docker-tinycore/data/rootfs-15.x-x86_64.tar.xz?label=image%20size:latest)
+![GitHub file size in bytes](https://img.shields.io/github/size/innovarew/docker-tinycore/data/rootfs-16.x-x86_64.tar.xz?label=image%20size:latest)
 
 # docker-tinycore
 
@@ -29,7 +29,7 @@ To build locally, just `make` as show below:
 
 ~~~
 # prepare the rootfs, build, and run the container
-sudo make TC_URL=http://tinycorelinux.net/15.x/x86_64/
+sudo make TC_URL=http://tinycorelinux.net/16.x/x86_64/
 ~~~
 
 ## Supported versions
@@ -39,6 +39,7 @@ Ready to use docker images from [docker-tinycore](https://github.com/innovarew/d
 | Release/Arch   | Docker Image                                                                                                      |
 | -------------- | ----------------------------------------------------------------------------------------------------------------- |
 | [latest](https://github.com/innovarew/docker-tinycore/)                     | `FROM ghcr.io/innovarew/docker-tinycore:latest`      |
+| [16.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/16.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:16.x-x86_64` |
 | [15.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/15.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:15.x-x86_64` |
 | [14.x-x86_64](https://github.com/innovarew/docker-tinycore/tree/14.x-x86_64)| `FROM ghcr.io/innovarew/docker-tinycore:14.x-x86_64` |
 | [14.x-x86](https://github.com/innovarew/docker-tinycore/tree/14.x-x86)      | `FROM ghcr.io/innovarew/docker-tinycore:14.x-x86`    |
