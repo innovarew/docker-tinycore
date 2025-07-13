@@ -30,7 +30,7 @@ PROGURL="https://github.com/innovarew/docker-tinycore"
 set -euf
 
 TC_ARCH=${TC_ARCH:-x86_64}
-TC_URL=${TC_URL:-http://tinycorelinux.net/15.x/${TC_ARCH}}
+TC_URL=${TC_URL:-http://tinycorelinux.net/16.x/${TC_ARCH}}
 TC_ISO=${TC_ISO:-$TC_URL/release/TinyCorePure64-current.iso}
 TCZ_URL=$TC_URL/tcz
 TC_CPIO=${TC_CPIO:-corepure64.gz}
